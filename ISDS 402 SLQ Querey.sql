@@ -1,0 +1,295 @@
+-- Database Design --
+
+-- Table Student --
+
+Drop table Student
+
+create table Student (
+Cwid int Not null, 
+Last_Name varchar(20) not null,
+First_Name varchar(20) not null, 
+Email varchar(40) not null,
+Major varchar(50) not null, 
+Date_Enrolled date not null,
+Graduation_Date date null,
+constraint pk_Cwid primary key(Cwid),
+constraint u_Cwid unique(Cwid),
+)
+
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (887171122, 'Mora', 'Michaell', 'mora@gmail.com', 'Accounting', '05/01/2020', Null)
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (879787878, 'Martin', 'Jake', 'martin@gmail.com', 'Accounting', '05/11/1990', '05/01/2023')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (121212121, 'Hao', 'Holly', 'hao@gmail.com', 'Information Systems & Accounting', '08/11/2020', '05/01/2023')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (865656565, 'Yang', 'Becky', 'yang@gmail.com', 'Art', '08/11/2020', '08/11/2021')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (816846812, 'Mendiola', 'Trish', 'mendiola@gmail.com', 'Nursing', '08/11/2021', '02/12/2022')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (882382932, 'Ala', 'Glizzy', 'ala@gmail.com', 'FInance', '06/21/2020', Null)
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (845987845, 'Gary', 'Vaynerchuck', 'gary@gmail.com', 'Art', '10/09/1990', '06/21/1992')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (732647734, 'Ugly', 'Guy', 'ugly@gmail.com', 'Science', '09/23/2020', '03/25/2022')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (238747334, 'Kelvin', 'Monte', 'kelvin@gmail.com', 'Biology', '4/01/2020', '05/7/2021')
+insert into Student (Cwid, Last_Name, First_Name, Email, Major, Date_Enrolled, Graduation_Date)
+	values (237473283, 'Slime', 'Geemoney', 'slime@gmail.com', 'Chemistry', '12/05/2021', '02/07/2022')
+
+select *
+from Student;
+
+-- Table Membership --
+
+Drop table Membership
+
+create table Membership (
+Membership_Id int identity Not null, 
+Date_Joined date not null, 
+Date_Left date null,
+Cwid int not null,
+Club_Id nvarchar(5) not null, 
+constraint pk_Membership_Id primary key(Membership_Id),
+constraint fk_Cwid foreign key(Cwid)
+references Student (Cwid)
+)
+
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('01/01/2020', '02/01/2020', 887171122, 'CL1')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('03/05/2020', null, 879787878, 'CL2')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('02/21/2019', '05/27/2020', 121212121, 'CL3')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('02/23/2019', null, 865656565, 'CL1')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('04/16/2020', null, 816846812, 'CL3')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('02/12/2020', null, 882382932, 'CL4')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('11/15/2010', null, 845987845, 'CL5')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('03/23/2012', null, 732647734, 'CL3')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('09/12/2023', null, 238747334, 'CL5')
+insert into Membership (Date_Joined, Date_Left, Cwid, Club_Id)
+	values ('01/09/2021', null, 237473283, 'CL2')
+
+select *
+from Membership
+
+-- Table Clubs --
+
+drop table Clubs
+
+create table Clubs (
+Club_Id nvarchar(5) not null, 
+Club_Name nvarchar(40) not null, 
+Advisor_Id int null, 
+constraint pk_Club_Id primary key(Club_Id),
+constraint fk_Advisor_Id foreign key(Advisor_Id)
+references Advisors(Advisor_Id)
+);
+
+insert into Clubs(Club_Id, Club_Name, Advisor_Id)
+	values ('CL1', 'BAP', 1)
+insert into Clubs(Club_Id,Club_Name, Advisor_Id)
+	values ('CL2','AS', 2)
+insert into Clubs(Club_Id,Club_Name, Advisor_Id)
+	values ('CL3','BAP', 3)
+insert into Clubs(Club_Id,Club_Name, Advisor_Id)
+	values ('CL4','Skateboad', 2)
+insert into Clubs(Club_Id,Club_Name, Advisor_Id)
+	values ('CL5','Chick-Fil-a', 5)
+insert into Clubs (Club_Id, Club_Name, Advisor_Id)
+	values ('CL6', 'Chess Club', 7)
+insert into Clubs (Club_Id, Club_Name, Advisor_Id)
+	values ('CL7', 'Key Club', 3)
+insert into Clubs (Club_Id, Club_Name, Advisor_Id)
+	values ('CL8', 'Vietnamese Culture', 5)
+insert into Clubs (Club_Id, Club_Name, Advisor_Id)
+	values ('CL9', 'America’s Got Politicians', 2)
+insert into Clubs (Club_Id, Club_Name, Advisor_Id)
+	values ('CL10', 'Gaming Club', 9)
+
+select *
+from Clubs
+
+-- Table Advisors --
+
+Drop table Advisors
+
+create table Advisors (
+Advisor_Id int identity not null, 
+Last_Name nvarchar(40) not null, 
+First_Name nvarchar(40) null,
+Department nvarchar(40) not null,
+Email nvarchar(40) not null,
+constraint pk_Advisor_Id primary key(Advisor_Id)
+)
+
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Tyler', 'Li', 'Biz', 'tli@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('John', 'Johnson', 'Biz', 'jjohnson@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Ryan', 'Martin', 'Biz', 'rmartin@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Gary', 'Hao', 'Biz', 'ghao@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Charilie', 'Montenegro', 'Finance', 'cmontenegro@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Naked', 'Guy', 'Biz', 'nguy63@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Billy', 'Mays', 'Biz', 'bMays@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Rachek', 'Green', 'Biz', 'rgreen91@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Taylor', 'Goulding', 'Biz', 'tgou024@fullerton.edu')
+insert into Advisors(First_Name, Last_Name, Department, Email)
+	values ('Jason', 'Nguyen', 'Biz', 'jnguyen21@fullerton.edu')
+
+select *
+from Advisors
+
+-- Table Sponsor --
+
+drop table Sponsor
+
+create table Sponsor (
+Sponsor_Id int identity not null, 
+Sponsor_Name nvarchar(40) not null, 
+Contact_First_Name nvarchar(40) null,
+Contact_Last_Name nvarchar(40) not null,
+Phone_Number nvarchar(40) not null,
+Email nvarchar(40) not null,
+constraint pk_Sponsor_Id primary key(Sponsor_Id)
+)
+
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Amazon', 'Jess', 'Bezo', '9128251057', 'jamazon@amazon.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Target', 'John', 'Mayor', '9119264836', 'targetjohnmayor@target.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('PetCo', 'Mary', 'Sue', '9338476385', 'marysue@petco.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Meta', 'Mark', 'Zuckerburg', '9118295017', 'markmeta@yahoo.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Razor', 'Mark', 'Jacobs', '9195746396', 'jacobs4razor@gmail.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Donda', 'Bye', 'Tolar', '9124201057', '1234@amazon.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('SNL', 'Skete', 'Davidson', '9119266969', 'skete@target.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('PetCo', 'Karen', 'Sue', '9336976385', 'maryfi@petco.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Meta', 'Maggie', 'Zuckerburg', '9118295017', 'maggiemeta@yahoo.com')
+insert into Sponsor(Sponsor_Name, Contact_First_Name, Contact_Last_Name, Phone_Number, Email)
+	values ('Mac', 'Dollar', 'Jacobs', '9196946396', 'jacobs4mac@gmail.com')
+
+select *
+from Sponsor
+
+-- Table Sponsor_Event --
+
+drop table Sponsor_Event
+
+create table Sponsor_Event (
+Donation_Id nvarchar(5) not null,
+Sponsor_Id int not null, 
+Club_Id nvarchar(5) not null, 
+Amount nvarchar(40) null,
+Date_Sponsored date not null,
+constraint pk_Donation_Id primary key(Donation_Id),
+constraint fk_Sponsor_Id foreign key(Sponsor_Id)
+	references Sponsor(Sponsor_Id),
+constraint fk_Club_Id foreign key(Club_Id)
+	references Clubs(Club_Id)
+)
+
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('JB1', 1, 'CL1', '$500.00', '01/20/2020')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('JB2', 2,'CL3', '$1200.00', '02/23/2019')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('JB3', 3, 'CL2', '$600.00', '04/18/2021')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('MJ1', 4, 'CL2', '$900.00', '02/06/2020')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('MZ1', 6, 'CL2', '$900.00', '04/11/2019')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('HG7', 4, 'CL1', '$500.00', '01/20/2020')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('RB2', 5, 'CL2', '$1200.00', '02/23/2019')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('KJ8', 6, 'CL3', '$600.00', '04/18/2021')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('FD3', 7, 'CL5', '$900.00', '02/06/2020')
+insert into Sponsor_Event(Donation_Id, Sponsor_Id, Club_Id, Amount, Date_Sponsored)
+	values ('BG6', 9, 'CL5', '$900.00', '04/11/2019')
+
+select *
+from Sponsor_Event
+
+-- Table Event --
+drop table Event
+
+create table Event (
+Event_Id nvarchar(20) not null, 
+Club_Id nvarchar(5) not null, 
+Event_Type nvarchar(40) null,
+Date date not null,
+Location nvarchar(60) not null,
+Time nvarchar(20) not null,
+constraint pk_Event_Id_Club_Id primary key(Event_Id, Club_Id),
+constraint fk_Club_Id2 foreign key(Club_Id)
+	references Clubs(Club_Id)
+)
+
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2AC', 'CL1', 'Chipotle Fundraiser', '04/06/2020','Chipotle', '10am-12pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2AC', 'CL2', 'Chipotle Fundraiser', '04/06/2020', 'Chipotle', '10am-12pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2BD', 'CL3', 'Food Drive', '06/09/2020','Pine Floor 1', '10am-2pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2CB', 'CL2', 'Donation Bingo', '05/12/2020','SRC', '10am-4pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2DA', 'CL4', 'Ring Sale', '07/03/2020','SRC', '7pm-9pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('5TH', 'CL1', 'Innout Fundraiser', '07/06/2021','Chipotle', '10am-12pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('4GF', 'CL10', 'Mcdonald Fundraiser', '04/05/2021', 'Chipotle', '10am-12pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2BD', 'CL7', 'Blood Drive', '12/09/2020','Pine Floor 1', '10am-2pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2CB', 'CL9', 'Donation', '05/12/2020','SRC', '10am-4pm')
+insert into Event(Event_Id, Club_Id, Event_Type, Date, Location, Time)
+	values ('2DA', 'CL6', 'Ring Sale', '07/03/2020','SRC', '7pm-9pm')
+
+select *
+from Event
+
+-- Select all --
+
+select *
+From Student
+
+select *
+From Membership
+
+select *
+From Clubs
+
+select *
+From Advisors
+
+select *
+From Sponsor
+
+select *
+From Sponsor_Event
+
+select *
+from Event
