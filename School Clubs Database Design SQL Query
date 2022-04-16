@@ -109,7 +109,7 @@ insert into Clubs (Club_Id, Club_Name, Advisor_Id)
 insert into Clubs (Club_Id, Club_Name, Advisor_Id)
 	values ('CL8', 'Vietnamese Culture', 5)
 insert into Clubs (Club_Id, Club_Name, Advisor_Id)
-	values ('CL9', 'America’s Got Politicians', 2)
+	values ('CL9', 'Americaâ€™s Got Politicians', 2)
 insert into Clubs (Club_Id, Club_Name, Advisor_Id)
 	values ('CL10', 'Gaming Club', 9)
 
